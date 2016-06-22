@@ -4,13 +4,46 @@
     "publisher": "SomosTechies.com",
     "description": "Install and configure this machine as a Octopus tentacle and register it with the Octopus Server",
     "tags": [
-        "Windows"
+        "Octopus","VSTS","DevOps","Deploy"
     ],
+    "iconUri": "https://raw.githubusercontent.com/StackStorm/st2contrib/master/packs/octopusdeploy/icon.png",
     "targetOsType": "Windows",
     "parameters": {
-        
+        "url": {
+            "type": "string",
+            "displayName": "Tentacle MSI Url",
+            "defaultValue": "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.3.19-x64.msi",
+            "description": "The url to download the Octopus Tentacle installer."
+        },        
+        "octopus_server": {
+            "type": "string",
+            "displayName": "Octopus Server Url",
+            "description": "The url of the Octopus Server."
+        },
+        "apikey": {
+            "type": "securestring",
+            "displayName": "Octopus Server Api Key",
+            "description": "API KEY to connect to the Octopus Server."
+        },
+        "environment": {
+            "type": "string",
+            "displayName": "Environment",
+            "description": "The environment of the Octopus Tentacle(like Integration, QA, UAT,Production).",
+            "defaultValue": "Integration"            
+        },
+        "tentacle_role":{
+            "type":"string",
+            "displayName":"Tentacle Role",
+            "description":"The role for the Octopus tentacle.",
+            "defaultValue":"web"
+        },
+        "thumbprint": {
+            "type": "string",
+            "displayName": "Octopus Thumbprint",
+            "description": "The Octopus Server Thumbprint."
+        }
     },
     "runCommand": {
-        "commandToExecute": "powershell.exe -ExecutionPolicy bypass -File EnableLocalAdmins.ps1"
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File download-install-setup.ps1 ',parameters('url'), ' ',parameters('octopus_server'),' ',parameters('environment'),' ',parameters('tentacle_role'),' ',parameters('apiKey'),' ',parameters('thumbprint'))]"
     }
 }

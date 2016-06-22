@@ -1,5 +1,29 @@
 #Downloading the tentacle installer
-$url = "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.3.19-x64.msi"
+[CmdletBinding()]
+Param(
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNullOrEmpty()]
+    $url,
+    
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNullOrEmpty()]
+    $octopus_server,
+    
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNullOrEmpty()]
+    $environment,
+    
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNullOrEmpty()]
+    $tentacle_role,
+    
+    [Parameter(Mandatory=$true)]        
+    $apiKey
+
+    [Parameter(Mandatory=$true)]        
+    $thumbprint
+)
+#$url = "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.3.19-x64.msi"
 $output = "$PSScriptRoot\tentacle.msi"
 $start_time = Get-Date
 
@@ -14,11 +38,11 @@ msiexec /i tentacle.msi /quiet
 cd "C:\Program Files\Octopus Deploy\Tentacle"
 
 #Installing Tentacle and set Thumbprint
-$octopus_server = "http://octopus.com"
-$environment = "Integration"
-$tentacle_role = "web"
-$apiKey = "";
-$thumbprint=""
+#$octopus_server = "http://octopus.com"
+#$environment = "Integration"
+#$tentacle_role = "web"
+#$apiKey = "";
+#$thumbprint=""
 
 #Create and install the Octopus Tentacle instance 
 Tentacle.exe create-instance --instance "Tentacle" --config "C:\Octopus\Tentacle.config" --console
