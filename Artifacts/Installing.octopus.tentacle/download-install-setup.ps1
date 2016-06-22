@@ -18,7 +18,7 @@ Param(
     $tentacle_role,
     
     [Parameter(Mandatory=$true)]        
-    $apiKey
+    $apiKey,
 
     [Parameter(Mandatory=$true)]        
     $thumbprint
