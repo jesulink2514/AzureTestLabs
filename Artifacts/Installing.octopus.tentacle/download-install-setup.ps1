@@ -32,7 +32,7 @@ $start_time = Get-Date
 Write-Output "Time taken downloading tentacle: $((Get-Date).Subtract($start_time).Seconds) second(s)"
 
 #Install Octopus Tentacle
-msiexec /i tentacle.msi /quiet
+msiexec /i tentacle.msi /quiet /norestart
 
 #Change location to installation directory
 cd "C:\Program Files\Octopus Deploy\Tentacle"
