@@ -50,7 +50,9 @@ Tentacle.exe new-certificate --instance "Tentacle" --if-blank --console
 Tentacle.exe configure --instance "Tentacle" --reset-trust --console
 Tentacle.exe configure --instance "Tentacle" --home "C:\Octopus" --app "C:\Octopus\Applications" --port "10933" --console
 Tentacle.exe configure --instance "Tentacle" --trust $thumbprint --console
-"netsh" advfirewall firewall add rule "name=Octopus Deploy Tentacle" dir=in action=allow protocol=TCP localport=10933
+
+#"netsh" advfirewall firewall add rule "name=Octopus Deploy Tentacle" dir=in action=allow protocol=TCP localport=10933
+New-NetFirewallRule -DisplayName "Octopus Deploy Tentacle" -Action Allow -Direction Inbound -LocalPort 10933 -Protocol TCP
 
 #Register the tentacle with the Octopus Server
 Tentacle.exe register-with --instance "Tentacle" --server $octopus_server --apiKey=$apiKey --role $tentacle_role --environment $environment --comms-style TentaclePassive --console
