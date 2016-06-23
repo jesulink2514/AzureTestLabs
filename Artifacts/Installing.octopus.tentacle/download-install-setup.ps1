@@ -8,6 +8,10 @@ Param(
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     $octopus_server,
+        
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNullOrEmpty()]
+    $ipAddress,    
     
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
@@ -58,7 +62,7 @@ Catch
 }
 
 #Register the tentacle with the Octopus Server
-.\Tentacle.exe register-with --instance "Tentacle" --server $octopus_server --apiKey=$apiKey --role $tentacle_role --environment $environment --comms-style TentaclePassive --console
+.\Tentacle.exe register-with --instance "Tentacle" --server $octopus_server --apiKey=$apiKey --role $tentacle_role --environment $environment --publicHostName $ipAddress --comms-style TentaclePassive --console
 .\Tentacle.exe service --instance "Tentacle" --install --start --console
 
 Write-Host "The tentacle was successfully installed."
