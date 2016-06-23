@@ -11,14 +11,12 @@
     "parameters": {
         "username": {
             "type": "string",
-            "displayName": "Admin UserName",
-            "defaultValue": "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.3.19-x64.msi",
+            "displayName": "Admin UserName",            
             "description": "The admin user name of the tentacle."
         },
         "password": {
             "type": "securestring",
-            "displayName": "Admin Password",
-            "defaultValue": "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.3.19-x64.msi",
+            "displayName": "Admin Password",            
             "description": "The password of the admin account."
         },
         "url": {
