@@ -20,6 +20,11 @@
             "displayName": "Octopus Server Url",
             "description": "The url of the Octopus Server."
         },
+        "ipAddress":{
+            "type":"string",
+            "displayName":"public ip of the Tentacle",
+            "description":"The public ip of the Tentacle."
+        },
         "apikey": {
             "type": "securestring",
             "displayName": "Octopus Server Api Key",
