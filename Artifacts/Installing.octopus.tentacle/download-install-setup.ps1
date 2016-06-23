@@ -38,20 +38,20 @@ msiexec /i tentacle.msi /quiet /norestart
 Start-Sleep -s 5
 
 #Change location to installation directory
-cd "C:\Program Files\Octopus Deploy\Tentacle"
+Set-Location "C:\Program Files\Octopus Deploy\Tentacle"
 
 #Create and install the Octopus Tentacle instance 
-Tentacle.exe create-instance --instance "Tentacle" --config "C:\Octopus\Tentacle.config" --console
-Tentacle.exe new-certificate --instance "Tentacle" --if-blank --console
-Tentacle.exe configure --instance "Tentacle" --reset-trust --console
-Tentacle.exe configure --instance "Tentacle" --home "C:\Octopus" --app "C:\Octopus\Applications" --port "10933" --console
-Tentacle.exe configure --instance "Tentacle" --trust $thumbprint --console
+.\Tentacle.exe create-instance --instance "Tentacle" --config "C:\Octopus\Tentacle.config" --console
+.\Tentacle.exe new-certificate --instance "Tentacle" --if-blank --console
+.\Tentacle.exe configure --instance "Tentacle" --reset-trust --console
+.\Tentacle.exe configure --instance "Tentacle" --home "C:\Octopus" --app "C:\Octopus\Applications" --port "10933" --console
+.\Tentacle.exe configure --instance "Tentacle" --trust $thumbprint --console
 
 #"netsh" advfirewall firewall add rule "name=Octopus Deploy Tentacle" dir=in action=allow protocol=TCP localport=10933
 New-NetFirewallRule -DisplayName "Octopus Deploy Tentacle" -Action Allow -Direction Inbound -LocalPort 10933 -Protocol TCP
 
 #Register the tentacle with the Octopus Server
-Tentacle.exe register-with --instance "Tentacle" --server $octopus_server --apiKey=$apiKey --role $tentacle_role --environment $environment --comms-style TentaclePassive --console
-Tentacle.exe service --instance "Tentacle" --install --start --console
+.\Tentacle.exe register-with --instance "Tentacle" --server $octopus_server --apiKey=$apiKey --role $tentacle_role --environment $environment --comms-style TentaclePassive --console
+.\Tentacle.exe service --instance "Tentacle" --install --start --console
 
 Write-Host "The tentacle was successfully installed."
