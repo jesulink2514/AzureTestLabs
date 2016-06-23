@@ -61,6 +61,6 @@
         }
     },
     "runCommand": {
-        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File setup.ps1 ',parameters('username'),' ',parameters('password'),'',parameters('url'), ' ',parameters('octopus_server'),' ',parameters('environment'),' ',parameters('tentacle_role'),' ',parameters('apiKey'),' ',parameters('thumbprint'))]"
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File setup.ps1 ',parameters('username'),' ',parameters('password'),'',parameters('url'),'',parameters('ipAddress'),' ',parameters('octopus_server'),' ',parameters('environment'),' ',parameters('tentacle_role'),' ',parameters('apiKey'),' ',parameters('thumbprint'))]"
     }
 }

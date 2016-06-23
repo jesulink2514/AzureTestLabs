@@ -3,13 +3,15 @@ Param(
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     $username,
+    
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     $password,
+    
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     $url,
-    
+
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     $octopus_server,
@@ -35,4 +37,4 @@ Param(
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
 
-Start-Process powershell.exe -Credential $credential -ExecutionPolicy bypass -File download-install-setup.ps1 $url $octopus_server $environment $tentacle_role $apiKey $thumbprint
+Start-Process powershell.exe -Credential $credential -ExecutionPolicy bypass -File download-install-setup.ps1 $url $octopus_server $ipAddress $environment $tentacle_role $apiKey $thumbprint
