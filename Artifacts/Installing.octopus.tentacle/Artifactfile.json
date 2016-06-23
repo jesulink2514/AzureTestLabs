@@ -9,6 +9,18 @@
     "iconUri": "https://raw.githubusercontent.com/StackStorm/st2contrib/master/packs/octopusdeploy/icon.png",
     "targetOsType": "Windows",
     "parameters": {
+        "username": {
+            "type": "string",
+            "displayName": "Admin UserName",
+            "defaultValue": "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.3.19-x64.msi",
+            "description": "The admin user name of the tentacle."
+        },
+        "password": {
+            "type": "securestring",
+            "displayName": "Admin Password",
+            "defaultValue": "https://download.octopusdeploy.com/octopus/Octopus.Tentacle.3.3.19-x64.msi",
+            "description": "The password of the admin account."
+        },
         "url": {
             "type": "string",
             "displayName": "Tentacle MSI Url",
@@ -49,6 +61,6 @@
         }
     },
     "runCommand": {
-        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File download-install-setup.ps1 ',parameters('url'), ' ',parameters('octopus_server'),' ',parameters('environment'),' ',parameters('tentacle_role'),' ',parameters('apiKey'),' ',parameters('thumbprint'))]"
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File download-install-setup.ps1 ',parameters('username'),' ',parameters('password'),'',parameters('url'), ' ',parameters('octopus_server'),' ',parameters('environment'),' ',parameters('tentacle_role'),' ',parameters('apiKey'),' ',parameters('thumbprint'))]"
     }
 }
