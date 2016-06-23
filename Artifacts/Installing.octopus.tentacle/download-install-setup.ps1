@@ -34,15 +34,11 @@ Write-Output "Time taken downloading tentacle: $((Get-Date).Subtract($start_time
 #Install Octopus Tentacle
 msiexec /i tentacle.msi /quiet /norestart
 
+#Wait a momento to avoid not found errors
+Start-Sleep -s 5
+
 #Change location to installation directory
 cd "C:\Program Files\Octopus Deploy\Tentacle"
-
-#Installing Tentacle and set Thumbprint
-#$octopus_server = "http://octopus.com"
-#$environment = "Integration"
-#$tentacle_role = "web"
-#$apiKey = "";
-#$thumbprint=""
 
 #Create and install the Octopus Tentacle instance 
 Tentacle.exe create-instance --instance "Tentacle" --config "C:\Octopus\Tentacle.config" --console
