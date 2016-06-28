@@ -1,0 +1,48 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2015-01-01/dtlArtifacts.json",
+    "title": "Set up Octopus Tentacle",
+    "publisher": "SomosTechies.com",
+    "description": "Configure this machine as a Octopus tentacle and register it with the Octopus Server",
+    "tags": [
+        "Octopus","VSTS","DevOps","Deploy"
+    ],
+    "iconUri": "https://raw.githubusercontent.com/StackStorm/st2contrib/master/packs/octopusdeploy/icon.png",
+    "targetOsType": "Windows",
+    "parameters": {                  
+        "octopus_server": {
+            "type": "string",
+            "displayName": "Octopus Server Url",
+            "description": "The url of the Octopus Server."
+        },
+        "ipAddress":{
+            "type":"string",
+            "displayName":"public ip of the Tentacle",
+            "description":"The public ip of the Tentacle."
+        },
+        "apikey": {
+            "type": "securestring",
+            "displayName": "Octopus Server Api Key",
+            "description": "API KEY to connect to the Octopus Server."
+        },
+        "environment": {
+            "type": "string",
+            "displayName": "Environment",
+            "description": "The environment of the Octopus Tentacle(like Integration, QA, UAT,Production).",
+            "defaultValue": "Integration"            
+        },
+        "tentacle_role":{
+            "type":"string",
+            "displayName":"Tentacle Role",
+            "description":"The role for the Octopus tentacle.",
+            "defaultValue":"web"
+        },
+        "thumbprint": {
+            "type": "string",
+            "displayName": "Octopus Thumbprint",
+            "description": "The Octopus Server Thumbprint."
+        }
+    },
+    "runCommand": {
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File setup.ps1 ',parameters('octopus_server'),'',parameters('ipAddress'),' ',parameters('apiKey'),' ',parameters('environment'),' ',parameters('tentacle_role'),' ',parameters('thumbprint'))]"
+    }
+}
